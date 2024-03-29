@@ -4,7 +4,7 @@
     private string _community;
     private int _result1;
     private int _result2;
-    public int _finalresult;
+    private int _finalresult;
     private bool _disqualification;
     public Participant(string surname, string community, int result1, int result2)
     {
