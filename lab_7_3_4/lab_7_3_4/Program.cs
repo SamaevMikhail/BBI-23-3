@@ -125,7 +125,7 @@ internal class Program
             new SkierMan("Григорий",40),
             new SkierMan("Глеб",30)
         };
-        ArrayPrint(womanGr1);
+
         
         SkierWoman[] women = new SkierWoman[10];
         for (int i = 0; i < 5; i++)
@@ -140,8 +140,10 @@ internal class Program
             men[i] = manGr1[i];
             men[i + 5] = manGr2[i];
         }
-        ArrayPrint(women);
+        Athlete.MergeSort(men);
         ArrayPrint(men);
+        Athlete.MergeSort(women);
+        ArrayPrint(women);
         Console.WriteLine();
         Athlete[] athletes = new Athlete[20];
         for (int i = 0; i < 10; i++)
@@ -150,7 +152,7 @@ internal class Program
             athletes[i + 10] = women[i];
 
         }
-        ArrayPrint(athletes);
+    
         Athlete.MergeSort(athletes);
         ArrayPrint(athletes);
 
