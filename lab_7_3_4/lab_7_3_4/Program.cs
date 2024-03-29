@@ -15,12 +15,6 @@
     public static void MergeSort(Athlete[] a)
     {
         if (a.Length<=1) return;
-        if (a[0].Score > a[1].Score && a.Length==2)
-        {
-            var temp = a[0];
-            a[0] = a[1];
-            a[1] = temp;
-        }
         int m= a.Length/2;
         Athlete[] b = new Athlete[m];
         Athlete[] c= new Athlete[a.Length-m];
