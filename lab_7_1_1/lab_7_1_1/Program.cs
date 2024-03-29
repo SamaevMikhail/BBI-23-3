@@ -4,7 +4,7 @@
     private string _community;
     private int _result1;
     private int _result2;
-    public int _finalresult { get; private set; }
+    public int _finalresult;
     private bool _disqualification;
     public Participant(string surname, string community, int result1, int result2)
     {
@@ -30,36 +30,7 @@
         }
 
     }
-}
-internal class Program
-{
-    static void Main(string[] args)
-    {
-        Participant[] participants = new Participant[5]
-        {
-            new Participant("Lenon", "pus", 20,21),
-            new Participant("Leontev", "dus", 19,18),
-            new Participant("Kirilov", "bus", 23,18),
-            new Participant("Korotki", "sus", 17,19),
-            new Participant("Bolshoi", "gus", 24,10)
-        };
-
-        Sort(participants);
-        Console.WriteLine("Места");
-        Console.WriteLine("Фамилия | Общество | Первый Результат | Второй Результат");
-        participants[2].Disqualification();
-        participants[0].Disqualification();
-        for (int i = 0; i < participants.Length; i++)
-        {
-
-            participants[i].Print();
-        }
-        Console.ReadKey();
-
-
-
-    }
-    static void Sort(Participant[] participants)
+    public static void Sort(Participant[] participants)
     {
         int d = participants.Length / 2;
         while (d >= 1)
@@ -80,4 +51,34 @@ internal class Program
             d /= 2;
         }
     }
+}
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Participant[] participants = new Participant[5]
+        {
+            new Participant("Lenon", "pus", 20,21),
+            new Participant("Leontev", "dus", 19,18),
+            new Participant("Kirilov", "bus", 23,18),
+            new Participant("Korotki", "sus", 17,19),
+            new Participant("Bolshoi", "gus", 24,10)
+        };
+
+        Participant.Sort(participants);
+        Console.WriteLine("Места");
+        Console.WriteLine("Фамилия | Общество | Первый Результат | Второй Результат");
+        participants[2].Disqualification();
+        participants[0].Disqualification();
+        for (int i = 0; i < participants.Length; i++)
+        {
+
+            participants[i].Print();
+        }
+        Console.ReadKey();
+
+
+
+    }
+    
 }
