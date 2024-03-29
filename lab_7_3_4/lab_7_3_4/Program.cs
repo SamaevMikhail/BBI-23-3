@@ -12,6 +12,59 @@
     {
         Console.WriteLine("{0,-7} | {1,-3} | ", _name, _score);
     }
+    public static void MergeSort(Athlete[] a)
+    {
+        if (a.Length<=1) return;
+        if (a[0].Score > a[1].Score && a.Length==2)
+        {
+            var temp = a[0];
+            a[0] = a[1];
+            a[1] = temp;
+        }
+        int m= a.Length/2;
+        Athlete[] b = new Athlete[m];
+        Athlete[] c= new Athlete[a.Length-m];
+        for (int i=0; i < b.Length; i++)
+        {
+            b[i] = a[i];
+        }
+        for (int i=0; i < c.Length; i++)
+        {
+            c[i] = a[m+i];
+        }
+        int l = 0;
+        int j=0;
+        int k = 0;
+        MergeSort(b);
+        MergeSort(c);
+        while (l<c.Length && j<b.Length)
+        {
+            if (c[l].Score < b[j].Score) 
+            {
+                a[k] = c[l];
+                k++;
+                l++;
+            }
+            else
+            {
+                a[k] = b[j];
+                k++;
+                j++;
+            }
+        }
+        while (l < c.Length)
+        {
+            a[k] = c[l];
+            k++;
+            l++;
+        }
+        while(j < b.Length)
+        {
+            a[k] = b[j];
+            k++;
+            j++;
+        }
+    }
 }
 class SkierMan : Athlete
 {
@@ -52,7 +105,7 @@ internal class Program
             new SkierWoman("Данна",27)
         };
         SkierWoman[] womanGr2 = new SkierWoman[5] {
-            new SkierWoman("Едизавета",28),
+            new SkierWoman("Елизавета",28),
             new SkierWoman("Варвара",29),
             new SkierWoman("Анастасия",44),
             new SkierWoman("София",34),
@@ -73,9 +126,7 @@ internal class Program
             new SkierMan("Глеб",30)
         };
         ArrayPrint(womanGr1);
-        ArrayPrint(womanGr2);
-        ArrayPrint(manGr1);
-        ArrayPrint(manGr2);
+        
         SkierWoman[] women = new SkierWoman[10];
         for (int i = 0; i < 5; i++)
         {
@@ -99,7 +150,8 @@ internal class Program
             athletes[i + 10] = women[i];
 
         }
-
+        ArrayPrint(athletes);
+        Athlete.MergeSort(athletes);
         ArrayPrint(athletes);
 
 
