@@ -2,8 +2,24 @@
 abstract class Task
 {
     public Task(string text) { }
-    protected abstract string ParseText(string text); // все разные
+    protected abstract string ParseText(string text); 
     protected virtual Dictionary<string, int> CreateRusLetterDict()
+    {
+        return new Dictionary<string, int>();
+    }
+    protected bool CheckTextOnLanguage(string text)
+    {
+        var uFirsLetter = text[0].ToString().ToLower().ToCharArray();
+        if ((int)uFirsLetter[0] > 96 && (int)uFirsLetter[0] < 124)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    protected virtual Dictionary<string, int> CreateEngLetterDict()
     {
         return new Dictionary<string, int>();
     }
@@ -22,7 +38,7 @@ abstract class Task
         }
         foreach (var t in code)
         {
-            Console.Write(t+" ");
+            Console.WriteLine(t+" ");
         }
         return code;
     }
@@ -81,7 +97,7 @@ class Task_9 : Task
     {
         return a.Take(10).Select(x => x.Key).ToArray();
     }
-    protected override Dictionary<string, int> CreateRusLetterDict()//Кодирует 10 самых часто встречающиехся сочетаний букв на английские буквы
+    protected override Dictionary<string, int> CreateRusLetterDict()
     {
         Dictionary<string, int> letterComb = new Dictionary<string, int>();
         for (int i = 1072; i < 1105; i++)
@@ -100,10 +116,41 @@ class Task_9 : Task
         }
         return letterComb;
     }
-       
+    protected override Dictionary<string, int> CreateEngLetterDict()
+    {
+        Dictionary<string, int> letterComb = new Dictionary<string, int>();
+        for (int i = 97; i < 123; i++)
+        {
+            for (int j = 97; j < 123; j++)
+            {
+                int n1 = i;
+                int n2 = j;
+                char first = (char)n1;
+                char second = (char)n2;
+                string k = first.ToString() + second.ToString();
+                letterComb.Add(k, 0);
+            }
+        }
+        foreach(var k in letterComb)
+        {
+            Console.WriteLine(k.Key);
+        }
+        return letterComb;
+    }
+   
     protected override string ParseText(string text)
     {
-        Dictionary<string, int> letterComb = CreateRusLetterDict();
+        Dictionary<string, int> letterComb= new Dictionary<string, int>();
+       
+        if (CheckTextOnLanguage(text))
+        {
+            letterComb = CreateEngLetterDict();
+        }
+        else
+        {
+           letterComb = CreateRusLetterDict();
+        }
+        
         for (int i = 0; i < text.Length - 1; i++)
         {
             if (letterComb.ContainsKey(text[i].ToString() + text[i + 1].ToString()))
@@ -124,7 +171,7 @@ class Task_9 : Task
         string[] ke = First10KeysToArray(sortedLetterComb);
         foreach (var h in ke)
         {
-            Console.Write(h+" ");
+            Console.WriteLine(h+" ");
         }
         string[] code = CreateCode();
 
@@ -185,16 +232,35 @@ class Task_12 : Task
         return codeTable;
     }
 
+    private Dictionary<string, string> GenerateRussianCodeTable()
+    {
+        string[] words = { "я", "это", "что", "ты", "был", "и", "себя", "мама", "в", "иметь" };
+        string[] codes = { "@", "#", "$", "%", "&", "*", "(", ")", "!", "?" };
+
+        Dictionary<string, string> codeTable = new Dictionary<string, string>();
+        for (int i = 0; i < words.Length; i++)
+        {
+            codeTable[words[i]] = codes[i];
+        }
+
+        return codeTable;
+    }
     public override string ToString()
     {
         return ParseText(text);
     }
 
-    protected override string ParseText(string text)// Кодирует текст, и возврощает декодированный (только русский текст)
+    protected override string ParseText(string text)
     {
-        
-
-        Dictionary<string, string> codeTable = GenerateEnglishCodeTable();
+        Dictionary<string, string> codeTable = new Dictionary<string, string>();
+        if (CheckTextOnLanguage(text))
+        {
+            codeTable = GenerateEnglishCodeTable();
+        }
+        else 
+        {
+            codeTable=GenerateRussianCodeTable();
+        }
 
         string[] wordsInText = text.Split(' ');
         for (int i = 0; i < wordsInText.Length; i++)
@@ -240,30 +306,47 @@ class Task_13 : Task
         }
         return rusLetters;
     }
-    protected override string ParseText(string text)// Считает процент слов с какой то определенной буквы(Только для русских текстов)
+    protected override Dictionary<string, int> CreateEngLetterDict()
     {
-        Dictionary<string, int> rusLetters = CreateRusLetterDict();
+        Dictionary<string, int> engLetters = new Dictionary<string, int>();
+        for (int j = 97; j < 123; j++)
+        {
+            int n2 = j;
+            char second = (char)n2;
+            engLetters.Add(second.ToString(), 0);//Добавление в словарь всех русских букв
 
+        }
+        return engLetters;
+    }
+    protected override string ParseText(string text)// Считает процент слов с какой то определенной буквы
+    {
+        Dictionary<string, int> letters = new Dictionary<string, int>() ;
+        if (CheckTextOnLanguage(text))
+        {
+            letters = CreateEngLetterDict();
+        }
+        else
+        {
+            letters = CreateRusLetterDict();
+        }
         string[] wordsInText = text.Split(" ");
         int wordsCount = wordsInText.Length;
-       
         for (int i = 0; i < wordsCount; i++)
         {
-            if (rusLetters.ContainsKey(wordsInText[i][0].ToString().ToLower()))
+            if (letters.ContainsKey(wordsInText[i][0].ToString().ToLower()))
             {
-                rusLetters[wordsInText[i][0].ToString().ToLower()]++; //Подсчет сколько раз появилась буква.
+                letters[wordsInText[i][0].ToString().ToLower()]++; //Подсчет сколько раз появилась буква.
             }
         }
-       
-        foreach (var letter in rusLetters)
+        foreach (var letter in letters)
         {
             double percent = (letter.Value * 100) / wordsCount; //Подсчет процента слов которые начинаются с каждой буквы
-            rusLetters[letter.Key] = Convert.ToInt32(percent); // Замена значений на проценты
+            letters[letter.Key] = Convert.ToInt32(percent); // Замена значений на проценты
             
 
         }
        
-        foreach(var letter in rusLetters)
+        foreach(var letter in letters)
         {
             if (letter.Value >= 2)  // Выводит только буквы у которых процент больше 2-ух
             {
@@ -329,12 +412,13 @@ class Program
 
         //Task_8 task8 = new Task_8("После многолетних исследований ученые обнаружили тревожную тенденцию в вырубке лесов Амазонии. Анализ данных показал, что основной участник разрушения лесного покрова – человеческая деятельность. За последние десятилетия рост объема вырубки достиг критических показателей. Главными факторами, способствующими этому, являются промышленные рубки, производство древесины, расширение сельскохозяйственных угодий и незаконная добыча древесины. Это приводит к серьезным экологическим последствиям, таким как потеря биоразнообразия, ухудшение климата и угроза вымирания многих видов животных и растений.");
         //Console.WriteLine(task8);
-        //Task_9 task9 = new Task_9("Первое кругосветное путешествие было осуществлено флотом, возглавляемым португальским исследователем Фернаном Магелланом. Путешествие началось 20 сентября 1519 года, когда флот, состоящий из пяти кораблей и примерно 270 человек, отправился из порту Сан-Лукас в Испании. Хотя Магеллан не закончил свое путешествие из-за гибели в битве на Филиппинах в 1521 году, его экспедиция стала первой, которая успешно обогнула Землю и доказала ее круглую форму. Это путешествие открыло новые морские пути и имело огромное значение для картографии и географических открытий.");
+        //Task_9 task9 = new Task_9("William Shakespeare, widely regarded as one of the greatest writers in the English language, authored a total of 37 plays, along with numerous poems and sonnets. He was born in Stratford-upon-Avon, England, in 1564, and died in 1616. Shakespeare's most famous works, including \"Romeo and Juliet,\" \"Hamlet,\" \"Macbeth,\" and \"Othello,\" were written during the late 16th and early 17th centuries. \"Romeo and Juliet,\" a tragic tale of young love, was penned around 1595. \"Hamlet,\" one of his most celebrated tragedies, was written in the early 1600s, followed by \"Macbeth,\" a gripping drama exploring themes of ambition and power, around 1606. \"Othello,\" a tragedy revolving around jealousy and deceit, was also composed during this period, believed to be around 1603.");
+        //Console.WriteLine(task9);
         //Task_10 task10 = new Task_10(task9.ToString());
         //Console.Write(task10);
-        //Task_12 task12 = new Task_12("William Shakespeare, widely regarded as one of the greatest writers in the English language, authored a total of 37 plays, along with numerous poems and sonnets. He was born in Stratford-upon-Avon, England, in 1564, and died in 1616. Shakespeare's most famous works, including \"Romeo and Juliet,\" \"Hamlet,\" \"Macbeth,\" and \"Othello,\" were written during the late 16th and early 17th centuries. Romeo and Juliet, a tragic tale of young love, was penned around 1595. Hamlet, one of his most celebrated tragedies, was written in the early 1600s, followed by Macbeth, a gripping drama exploring themes of ambition and power, around 1606. Othello, a tragedy revolving around jealousy and deceit, was also composed during this period, believed to be around 1603.");
+        //Task_12 task12 = new Task_12("Первое кругосветное путешествие было осуществлено флотом, возглавляемым португальским исследователем Фернаном Магелланом. Путешествие началось 20 сентября 1519 года, когда флот, состоящий из пяти кораблей и примерно 270 человек, отправился из порту Сан-Лукас в Испании. Хотя Магеллан не закончил свое путешествие из-за гибели в битве на Филиппинах в 1521 году, его экспедиция стала первой, которая успешно обогнула Землю и доказала ее круглую форму. Это путешествие открыло новые морские пути и имело огромное значение для картографии и географических открытий.");
         //Console.WriteLine(task12.ToString());
-        //Task_13 task13 = new Task_13("1 июля 2015 года Греция объявила о дефолте по государственному долгу, став первой развитой страной в истории, которая не смогла выплатить свои долговые обязательства в полном объеме. Сумма дефолта составила порядка 1,6 миллиарда евро. Этому предшествовали долгие переговоры с международными кредиторами, такими как Международный валютный фонд (МВФ), Европейский центральный банк (ЕЦБ) и Европейская комиссия (ЕК), о программах финансовой помощи и реструктуризации долга. Основными причинами дефолта стали недостаточная эффективность реформ, направленных на улучшение финансовой стабильности страны, а также политическая нестабильность, что вызвало потерю доверия со стороны международных инвесторов и кредиторов. Последствия дефолта оказались глубокими и долгосрочными: сокращение кредитного рейтинга страны, увеличение затрат на заемный капитал, рост стоимости заимствований и утрата доверия со стороны международных инвесторов.");
+        //Task_13 task13 = new Task_13("William Shakespeare, widely regarded as one of the greatest writers in the English language, authored a total of 37 plays, along with numerous poems and sonnets. He was born in Stratford-upon-Avon, England, in 1564, and died in 1616. Shakespeare's most famous works, including \"Romeo and Juliet,\" \"Hamlet,\" \"Macbeth,\" and \"Othello,\" were written during the late 16th and early 17th centuries. \"Romeo and Juliet,\" a tragic tale of young love, was penned around 1595. \"Hamlet,\" one of his most celebrated tragedies, was written in the early 1600s, followed by \"Macbeth,\" a gripping drama exploring themes of ambition and power, around 1606. \"Othello,\" a tragedy revolving around jealousy and deceit, was also composed during this period, believed to be around 1603.");
         //Console.WriteLine(task13);
         //Task_15 task15 = new Task_15("Первое кругосветное путешествие было осуществлено флотом, возглавляемым португальским исследователем Фернаном Магелланом. Путешествие началось 20 сентября 1519 года, когда флот, состоящий из пяти кораблей и примерно 270 человек, отправился из порту Сан-Лукас в Испании. Хотя Магеллан не закончил свое путешествие из-за гибели в битве на Филиппинах в 1521 году, его экспедиция стала первой, которая успешно обогнула Землю и доказала ее круглую форму. Это путешествие открыло новые морские пути и имело огромное значение для картографии и географических открытий.");
         //Console.WriteLine(task15);
