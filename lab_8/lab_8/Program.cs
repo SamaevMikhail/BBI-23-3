@@ -27,7 +27,7 @@ abstract class Task
     {
         string[] code = new string[10];
         int c = 0;
-        for (int i = 65; i < 75; i++)
+        for (int i = 33; i < 44; i++)
         {
             code[c] = char.ToUpper((char)i).ToString();
             c++;
@@ -189,7 +189,7 @@ class Task_10 : Task
     protected override string ParseText(string text) //Декодирует текст, который получен в результате кодировки в Task_9, определенным кодом
     {
 
-        string[] ke = { "ПЕ", "во", "е ", "кр", "тос", "вт", "ое", "пу", "те", "ше" };//ТУт пишется символы на которые надо заменить.
+        string[] ke = { "ПЕ", "во", "е ", "кр", "тос", "вт", "ое", "пу", "те", "ше" };//Тут пишется символы на которые надо заменить.
         string[] code = CreateCode();
 
         for (int i = 0; i < ke.Length; i++)
@@ -358,7 +358,11 @@ class Task_15 : Task
     }
     protected override string ParseText(string text) //Считает сумму чисел в строке
     {
-        string[] wordsInText = text.Split(" ".ToCharArray());
+        string[] wordsInText = text.Split(" .,()-\"".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        foreach (var o in wordsInText)
+        {
+            Console.WriteLine($"{o}");
+        }
     
         double sum = 0;
         for (int i = 0; i < wordsInText.Length; i++)
@@ -390,7 +394,7 @@ class Program
 {
     public static void Main()
     {
-        string text = File.ReadAllText(@"C:\Users\user\Documents\Учеба\Прога\text3.txt");
+        string text = File.ReadAllText(@"C:\Users\user\Documents\Учеба\Прога\text6.txt");
 
         Task_8 task8 = new Task_8(text);
         Console.WriteLine("\t Задание 8");
@@ -410,8 +414,6 @@ class Program
         Console.WriteLine("\n \t Задание 15");
         Task_15 task15 = new Task_15(text);
         Console.WriteLine(task15);
-
-
     }
 
 }
