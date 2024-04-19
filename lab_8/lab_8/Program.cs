@@ -36,10 +36,7 @@ abstract class Task
                 break;
             }
         }
-        foreach (var t in code)
-        {
-            Console.WriteLine(t+" ");
-        }
+       
         return code;
     }
 }
@@ -131,10 +128,7 @@ class Task_9 : Task
                 letterComb.Add(k, 0);
             }
         }
-        foreach(var k in letterComb)
-        {
-            Console.WriteLine(k.Key);
-        }
+       
         return letterComb;
     }
    
@@ -169,10 +163,7 @@ class Task_9 : Task
 
         //}
         string[] ke = First10KeysToArray(sortedLetterComb);
-        foreach (var h in ke)
-        {
-            Console.WriteLine(h+" ");
-        }
+       
         string[] code = CreateCode();
 
         
@@ -367,35 +358,25 @@ class Task_15 : Task
     }
     protected override string ParseText(string text) //Считает сумму чисел в строке
     {
-        string[] wordsInText = text.Split(" ");
-        int c = 0;
-        for (int i = 0; i < wordsInText.Length; i++)
-        {
-            char wordFirstLetter = wordsInText[i][0];
-            if (char.IsDigit(wordFirstLetter))
-            {
-                c++;
-
-            }
-        }
-        string[] numbersInText = new string[c];
-        int k = 0;
+        string[] wordsInText = text.Split(" ".ToCharArray());
+    
+        double sum = 0;
         for (int i = 0; i < wordsInText.Length; i++)
         {
             if (char.IsDigit(wordsInText[i][0]))
             {
-                numbersInText[k] = wordsInText[i];
-                k++;
+                for (int j = wordsInText[i].Length-1; j > 0; j--)
+                {
+                    if (char.IsDigit(wordsInText[i][j]))
+                    {
+                        
+                        sum += Convert.ToDouble(wordsInText[i].Substring(0, j +1));
+                       
+                        break;
+                    }
+                }
             }
-            if (k == c)
-            {
-                break;
-            }
-        }
-        int sum = 0;
-        foreach (var j in numbersInText)
-        {
-            sum += int.Parse(j);
+           
         }
         return sum.ToString();
     }
@@ -409,19 +390,26 @@ class Program
 {
     public static void Main()
     {
+        string text = File.ReadAllText(@"C:\Users\user\Documents\Учеба\Прога\text3.txt");
 
-        //Task_8 task8 = new Task_8("После многолетних исследований ученые обнаружили тревожную тенденцию в вырубке лесов Амазонии. Анализ данных показал, что основной участник разрушения лесного покрова – человеческая деятельность. За последние десятилетия рост объема вырубки достиг критических показателей. Главными факторами, способствующими этому, являются промышленные рубки, производство древесины, расширение сельскохозяйственных угодий и незаконная добыча древесины. Это приводит к серьезным экологическим последствиям, таким как потеря биоразнообразия, ухудшение климата и угроза вымирания многих видов животных и растений.");
-        //Console.WriteLine(task8);
-        //Task_9 task9 = new Task_9("William Shakespeare, widely regarded as one of the greatest writers in the English language, authored a total of 37 plays, along with numerous poems and sonnets. He was born in Stratford-upon-Avon, England, in 1564, and died in 1616. Shakespeare's most famous works, including \"Romeo and Juliet,\" \"Hamlet,\" \"Macbeth,\" and \"Othello,\" were written during the late 16th and early 17th centuries. \"Romeo and Juliet,\" a tragic tale of young love, was penned around 1595. \"Hamlet,\" one of his most celebrated tragedies, was written in the early 1600s, followed by \"Macbeth,\" a gripping drama exploring themes of ambition and power, around 1606. \"Othello,\" a tragedy revolving around jealousy and deceit, was also composed during this period, believed to be around 1603.");
-        //Console.WriteLine(task9);
-        //Task_10 task10 = new Task_10(task9.ToString());
-        //Console.Write(task10);
-        //Task_12 task12 = new Task_12("Первое кругосветное путешествие было осуществлено флотом, возглавляемым португальским исследователем Фернаном Магелланом. Путешествие началось 20 сентября 1519 года, когда флот, состоящий из пяти кораблей и примерно 270 человек, отправился из порту Сан-Лукас в Испании. Хотя Магеллан не закончил свое путешествие из-за гибели в битве на Филиппинах в 1521 году, его экспедиция стала первой, которая успешно обогнула Землю и доказала ее круглую форму. Это путешествие открыло новые морские пути и имело огромное значение для картографии и географических открытий.");
-        //Console.WriteLine(task12.ToString());
-        //Task_13 task13 = new Task_13("William Shakespeare, widely regarded as one of the greatest writers in the English language, authored a total of 37 plays, along with numerous poems and sonnets. He was born in Stratford-upon-Avon, England, in 1564, and died in 1616. Shakespeare's most famous works, including \"Romeo and Juliet,\" \"Hamlet,\" \"Macbeth,\" and \"Othello,\" were written during the late 16th and early 17th centuries. \"Romeo and Juliet,\" a tragic tale of young love, was penned around 1595. \"Hamlet,\" one of his most celebrated tragedies, was written in the early 1600s, followed by \"Macbeth,\" a gripping drama exploring themes of ambition and power, around 1606. \"Othello,\" a tragedy revolving around jealousy and deceit, was also composed during this period, believed to be around 1603.");
-        //Console.WriteLine(task13);
-        //Task_15 task15 = new Task_15("Первое кругосветное путешествие было осуществлено флотом, возглавляемым португальским исследователем Фернаном Магелланом. Путешествие началось 20 сентября 1519 года, когда флот, состоящий из пяти кораблей и примерно 270 человек, отправился из порту Сан-Лукас в Испании. Хотя Магеллан не закончил свое путешествие из-за гибели в битве на Филиппинах в 1521 году, его экспедиция стала первой, которая успешно обогнула Землю и доказала ее круглую форму. Это путешествие открыло новые морские пути и имело огромное значение для картографии и географических открытий.");
-        //Console.WriteLine(task15);
+        Task_8 task8 = new Task_8(text);
+        Console.WriteLine("\t Задание 8");
+        Console.WriteLine(task8);
+        Console.WriteLine("\n \t Задание 9");
+        Task_9 task9 = new Task_9(text);
+        Console.WriteLine(task9);
+        Console.WriteLine("\n\t Задание 10");
+        Task_10 task10 = new Task_10(task9.ToString());
+        Console.Write(task10);
+        Console.WriteLine("\n \t Задание 12");
+        Task_12 task12 = new Task_12(text);
+        Console.WriteLine(task12.ToString());
+        Console.WriteLine("\n \t Задание 13");
+        Task_13 task13 = new Task_13(text);
+        Console.WriteLine(task13);
+        Console.WriteLine("\n \t Задание 15");
+        Task_15 task15 = new Task_15(text);
+        Console.WriteLine(task15);
 
 
     }
