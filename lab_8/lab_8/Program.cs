@@ -1,23 +1,29 @@
 ﻿
 abstract class Task
 {
-    public Task(string text) { }
+    protected string text;
+    public override string ToString()
+    {
+        return ParseText(text);
+    }
+
+    public Task(string text) { this.text = text; }
     protected abstract string ParseText(string text); 
     protected virtual Dictionary<string, int> CreateRusLetterDict()
     {
         return new Dictionary<string, int>();
     }
-    protected bool CheckTextOnLanguage(string text)
+    protected bool CheckTextOnLanguage()
     {
-        var uFirsLetter = text[0].ToString().ToLower().ToCharArray();
-        if ((int)uFirsLetter[0] > 96 && (int)uFirsLetter[0] < 124)
+        string rusLetter = "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
+        for (int i=0; i<rusLetter.Length;i++)
         {
-            return true;
+            if (text.Contains(rusLetter[i]))
+            {
+                return true;
+            }
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     protected virtual Dictionary<string, int> CreateEngLetterDict()
     {
@@ -27,16 +33,19 @@ abstract class Task
     {
         string[] code = new string[10];
         int c = 0;
-        for (int i = 33; i < 44; i++)
+        for (int i = 33; i < 127; i++)
         {
-            code[c] = char.ToUpper((char)i).ToString();
+            if (text.Contains((char)i) == false)
+            {
+                 code[c] = char.ToUpper((char)i).ToString();
             c++;
             if (c == 10)
             {
                 break;
             }
+            }
+           
         }
-       
         return code;
     }
 }
@@ -45,23 +54,19 @@ abstract class Task
 
 class Task_8 : Task
 {
-    string text;
     public Task_8(string text) : base(text) { this.text = text; }
-    public override string ToString()
-    {
-        text = ParseText(text);
-        return text;
-    }
-    protected override string ParseText(string text)//Превращает текс в строки по 50 символов.
+ 
+    protected override string ParseText(string text )//Превращает текс в строки по 50 символов.
     {
         int start = 0;
         string result = "";
         int i = 50;
-        for (int j = i; j < text.Length; j += i)
+        int j;
+        for ( j = i; j < text.Length; j += i)
         {
             string s = "";
             int k;
-            for (k = j; j >= start; k--)
+            for (k = j; k >= start; k--)
             {
                 if (text[k] == ' ')
                 {
@@ -76,24 +81,29 @@ class Task_8 : Task
             // Console.WriteLine("i = {0}, k = {1}, j = {2}, start = {3}", i, k, j, start); //
             // Console.WriteLine(line); //
         }
-
-        return result;
+        return result += text.Substring(j - i,text.Length-(j-i)) ;
 
     }
 }
 class Task_9 : Task 
 {
-    string text;
-    public Task_9(string text) : base(text) { this.text = text; }
-    public override string ToString()
+    private string[] Ke;
+    private string[] Codes;
+    public Task_9(string text) : base(text) {  }
+    public string[] GetKeys()
     {
-       
-        return ParseText(text);
+        return Ke;
     }
+    public string[] GetCodes()
+    {
+        return Codes;
+    }
+   
     protected string[] First10KeysToArray(Dictionary<string, int> a) 
     {
         return a.Take(10).Select(x => x.Key).ToArray();
     }
+
     protected override Dictionary<string, int> CreateRusLetterDict()
     {
         Dictionary<string, int> letterComb = new Dictionary<string, int>();
@@ -132,19 +142,20 @@ class Task_9 : Task
         return letterComb;
     }
    
+    
     protected override string ParseText(string text)
     {
-        Dictionary<string, int> letterComb= new Dictionary<string, int>();
-       
-        if (CheckTextOnLanguage(text))
+        Dictionary<string, int> letterComb = new Dictionary<string, int>();
+
+        if (CheckTextOnLanguage() == false)
         {
             letterComb = CreateEngLetterDict();
         }
         else
         {
-           letterComb = CreateRusLetterDict();
+            letterComb = CreateRusLetterDict();
         }
-        
+
         for (int i = 0; i < text.Length - 1; i++)
         {
             if (letterComb.ContainsKey(text[i].ToString() + text[i + 1].ToString()))
@@ -163,15 +174,14 @@ class Task_9 : Task
 
         //}
         string[] ke = First10KeysToArray(sortedLetterComb);
-       
         string[] code = CreateCode();
-
-        
 
         for (int i = 0; i < ke.Length; i++)
         {
             text = text.Replace(ke[i], code[i]);
         }
+        Ke = ke;
+        Codes= code;
         //Console.WriteLine(text);
         return text;
     }
@@ -179,18 +189,19 @@ class Task_9 : Task
 }
 class Task_10 : Task 
 {
-    string text;
-    public Task_10(string text) : base(text) { this.text = text; }
-    public override string ToString()
+    string[] codes;
+    string[] keys;
+    public Task_10(string text, string[] codes, string[] keys) : base(text)
     {
-
-        return ParseText(text);
+        this.codes = codes;
+        this.keys = keys;
     }
+    
     protected override string ParseText(string text) //Декодирует текст, который получен в результате кодировки в Task_9, определенным кодом
     {
 
-        string[] ke = { "ПЕ", "во", "е ", "кр", "тос", "вт", "ое", "пу", "те", "ше" };//Тут пишется символы на которые надо заменить.
-        string[] code = CreateCode();
+        string[] ke = keys;//Тут пишется символы на которые надо заменить.
+        string[] code = codes;
 
         for (int i = 0; i < ke.Length; i++)
         {
@@ -203,11 +214,9 @@ class Task_10 : Task
 }
 class Task_12 : Task
 {
-    string text;
   
     public Task_12(string text) : base(text)
     {
-        this.text = text;
     }
     private Dictionary<string, string> GenerateEnglishCodeTable()
     {
@@ -236,15 +245,11 @@ class Task_12 : Task
 
         return codeTable;
     }
-    public override string ToString()
-    {
-        return ParseText(text);
-    }
-
+   
     protected override string ParseText(string text)
     {
         Dictionary<string, string> codeTable = new Dictionary<string, string>();
-        if (CheckTextOnLanguage(text))
+        if (CheckTextOnLanguage() == false)
         {
             codeTable = GenerateEnglishCodeTable();
         }
@@ -274,15 +279,10 @@ class Task_12 : Task
 }
 class Task_13 : Task 
 {
-    string text;
+
 
     public Task_13(string text) : base(text)
     {
-        this.text = text;
-    }
-    public override string ToString()
-    {
-        return ParseText(text);
     }
     protected override Dictionary<string, int> CreateRusLetterDict() 
     {
@@ -309,10 +309,10 @@ class Task_13 : Task
         }
         return engLetters;
     }
-    protected override string ParseText(string text)// Считает процент слов с какой то определенной буквы
+    protected override string ParseText (string text)// Считает процент слов с какой то определенной буквы
     {
         Dictionary<string, int> letters = new Dictionary<string, int>() ;
-        if (CheckTextOnLanguage(text))
+        if (CheckTextOnLanguage() == false)
         {
             letters = CreateEngLetterDict();
         }
@@ -320,7 +320,7 @@ class Task_13 : Task
         {
             letters = CreateRusLetterDict();
         }
-        string[] wordsInText = text.Split(" ");
+        string[] wordsInText = text.Split(" .,()-\"?:;!".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         int wordsCount = wordsInText.Length;
         for (int i = 0; i < wordsCount; i++)
         {
@@ -336,7 +336,6 @@ class Task_13 : Task
             
 
         }
-       
         foreach(var letter in letters)
         {
             if (letter.Value >= 2)  // Выводит только буквы у которых процент больше 2-ух
@@ -349,20 +348,13 @@ class Task_13 : Task
 }
 class Task_15 : Task
 {
-    string text;
-    public Task_15(string text) : base(text) { this.text = text; }
-    public override string ToString()
-    {
 
-        return ParseText(text);
-    }
+    public Task_15(string text) : base(text) { }
+   
     protected override string ParseText(string text) //Считает сумму чисел в строке
     {
-        string[] wordsInText = text.Split(" .,()-\"".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        foreach (var o in wordsInText)
-        {
-            Console.WriteLine($"{o}");
-        }
+        string[] wordsInText = text.Split(" .,()-\"?:;!".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+      
     
         double sum = 0;
         for (int i = 0; i < wordsInText.Length; i++)
@@ -394,7 +386,7 @@ class Program
 {
     public static void Main()
     {
-        string text = File.ReadAllText(@"C:\Users\user\Documents\Учеба\Прога\text6.txt");
+        string text = File.ReadAllText(@"D:\Учеба\мисис лабы\Програмирование\туксты\text5.txt");
 
         Task_8 task8 = new Task_8(text);
         Console.WriteLine("\t Задание 8");
@@ -403,8 +395,8 @@ class Program
         Task_9 task9 = new Task_9(text);
         Console.WriteLine(task9);
         Console.WriteLine("\n\t Задание 10");
-        Task_10 task10 = new Task_10(task9.ToString());
-        Console.Write(task10);
+        Task_10 task10 = new Task_10(task9.ToString(), task9.GetCodes(),task9.GetKeys());
+        Console.WriteLine(task10);
         Console.WriteLine("\n \t Задание 12");
         Task_12 task12 = new Task_12(text);
         Console.WriteLine(task12.ToString());
