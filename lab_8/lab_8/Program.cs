@@ -64,7 +64,6 @@ class Task_8 : Task
         int j;
         for ( j = i; j < text.Length; j += i)
         {
-            string s = "";
             int k;
             for (k = j; k >= start; k--)
             {
@@ -72,9 +71,23 @@ class Task_8 : Task
                 {
                     break;
                 }
-                s += " ";
+           
             }
-            string line = text.Substring(start, k - start) + s;
+            string line = text.Substring(start, k - start);
+            int z = line.Length;
+            while (z < 50)
+            {
+                for (int l=0; l < line.Length; l++)
+                {
+                    if (line[l]==' ')
+                    {
+                        line= line.Insert(l, " ");
+                        l++;
+                        z++;
+                        if (line.Length >= 50) { break; }
+                    }
+                }
+            }
             start = k + 1;
             j = start;
             result += line + "\n";
@@ -353,15 +366,20 @@ class Task_15 : Task
    
     protected override string ParseText(string text) //Считает сумму чисел в строке
     {
-        string[] wordsInText = text.Split(" .,()-\"?:;!".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-      
-    
+        string[] wordsInText = text.Split(" ");
+        
         double sum = 0;
         for (int i = 0; i < wordsInText.Length; i++)
         {
+            
             if (char.IsDigit(wordsInText[i][0]))
             {
-                for (int j = wordsInText[i].Length-1; j > 0; j--)
+                if (wordsInText[i].Contains(','))
+                {
+                    int index = wordsInText[i].IndexOf(',');
+                    wordsInText[i] = wordsInText[i].Substring(0,index) +'.'+ wordsInText[i].Substring(index+1);
+                }
+                for (int j = wordsInText[i].Length-1; j >= 0; j--)
                 {
                     if (char.IsDigit(wordsInText[i][j]))
                     {
