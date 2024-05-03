@@ -1,4 +1,33 @@
-﻿
+﻿struct DictSymbolsWsords
+{
+    string symbol;
+    string RusWord;
+    string EngWord;
+    public string engWord => EngWord;
+    public string rusWord => RusWord;
+    public string Symbol => symbol;
+    public DictSymbolsWsords(string symbol, string RusWord, string EngWord)
+    {
+        this.symbol = symbol;
+        this.RusWord = RusWord;
+        this.EngWord = EngWord;
+    }
+    
+    static public DictSymbolsWsords[] CreateSymToWords()
+    {
+        string[] EngWords = { "the", "be", "to", "of", "and", "a", "in", "that", "have", "i" };
+        string[] codes = { "@", "#", "$", "%", "&", "*", "(", ")", "!", "?" };
+        string[] RusWords = { "я", "это", "что", "ты", "был", "и", "себя", "мама", "в", "иметь" };
+
+
+        DictSymbolsWsords[] dictSymbolsWsords = new DictSymbolsWsords[10];
+        for (int i = 0; i < 10; i++) {
+            dictSymbolsWsords[i]= new DictSymbolsWsords(codes[i], RusWords[i], EngWords[i]);
+        }
+        return dictSymbolsWsords;
+    }
+}
+
 abstract class Task
 {
     protected string text;
@@ -8,7 +37,7 @@ abstract class Task
     }
 
     public Task(string text) { this.text = text; }
-    protected abstract string ParseText(string text); 
+    protected abstract string ParseText(string text);
     protected virtual Dictionary<string, int> CreateRusLetterDict()
     {
         return new Dictionary<string, int>();
@@ -16,7 +45,7 @@ abstract class Task
     protected bool CheckTextOnLanguage()
     {
         string rusLetter = "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
-        for (int i=0; i<rusLetter.Length;i++)
+        for (int i = 0; i < rusLetter.Length; i++)
         {
             if (text.Contains(rusLetter[i]))
             {
@@ -37,14 +66,14 @@ abstract class Task
         {
             if (text.Contains((char)i) == false)
             {
-                 code[c] = char.ToUpper((char)i).ToString();
-            c++;
-            if (c == 10)
-            {
-                break;
+                code[c] = char.ToUpper((char)i).ToString();
+                c++;
+                if (c == 10)
+                {
+                    break;
+                }
             }
-            }
-           
+
         }
         return code;
     }
@@ -55,14 +84,14 @@ abstract class Task
 class Task_8 : Task
 {
     public Task_8(string text) : base(text) { this.text = text; }
- 
-    protected override string ParseText(string text )//Превращает текс в строки по 50 символов.
+
+    protected override string ParseText(string text)//Превращает текс в строки по 50 символов.
     {
         int start = 0;
         string result = "";
         int i = 50;
         int j;
-        for ( j = i; j < text.Length; j += i)
+        for (j = i; j < text.Length; j += i)
         {
             int k;
             for (k = j; k >= start; k--)
@@ -71,17 +100,17 @@ class Task_8 : Task
                 {
                     break;
                 }
-           
+
             }
             string line = text.Substring(start, k - start);
             int z = line.Length;
             while (z < 50)
             {
-                for (int l=0; l < line.Length; l++)
+                for (int l = 0; l < line.Length; l++)
                 {
-                    if (line[l]==' ')
+                    if (line[l] == ' ')
                     {
-                        line= line.Insert(l, " ");
+                        line = line.Insert(l, " ");
                         l++;
                         z++;
                         if (line.Length >= 50) { break; }
@@ -94,15 +123,15 @@ class Task_8 : Task
             // Console.WriteLine("i = {0}, k = {1}, j = {2}, start = {3}", i, k, j, start); //
             // Console.WriteLine(line); //
         }
-        return result += text.Substring(j - i,text.Length-(j-i)) ;
+        return result += text.Substring(j - i, text.Length - (j - i));
 
     }
 }
-class Task_9 : Task 
+class Task_9 : Task
 {
     private string[] Ke;
     private string[] Codes;
-    public Task_9(string text) : base(text) {  }
+    public Task_9(string text) : base(text) { }
     public string[] GetKeys()
     {
         return Ke;
@@ -111,8 +140,8 @@ class Task_9 : Task
     {
         return Codes;
     }
-   
-    protected string[] First10KeysToArray(Dictionary<string, int> a) 
+
+    protected string[] First10KeysToArray(Dictionary<string, int> a)
     {
         return a.Take(10).Select(x => x.Key).ToArray();
     }
@@ -151,11 +180,11 @@ class Task_9 : Task
                 letterComb.Add(k, 0);
             }
         }
-       
+
         return letterComb;
     }
-   
-    
+
+
     protected override string ParseText(string text)
     {
         Dictionary<string, int> letterComb = new Dictionary<string, int>();
@@ -194,13 +223,13 @@ class Task_9 : Task
             text = text.Replace(ke[i], code[i]);
         }
         Ke = ke;
-        Codes= code;
+        Codes = code;
         //Console.WriteLine(text);
         return text;
     }
 
 }
-class Task_10 : Task 
+class Task_10 : Task
 {
     string[] codes;
     string[] keys;
@@ -209,7 +238,7 @@ class Task_10 : Task
         this.codes = codes;
         this.keys = keys;
     }
-    
+
     protected override string ParseText(string text) //Декодирует текст, который получен в результате кодировки в Task_9, определенным кодом
     {
 
@@ -221,83 +250,81 @@ class Task_10 : Task
             text = text.Replace(code[i], ke[i]);
         }
 
-        return text; 
+        return text;
     }
 
 }
 class Task_12 : Task
 {
-  
+
     public Task_12(string text) : base(text)
     {
     }
-    private Dictionary<string, string> GenerateEnglishCodeTable()
-    {
-        string[] words = { "the", "be", "to", "of", "and", "a", "in", "that", "have", "I" };
-        string[] codes = { "@", "#", "$", "%", "&", "*", "(", ")", "!", "?" };
-
-        Dictionary<string, string> codeTable = new Dictionary<string, string>();
-        for (int i = 0; i < words.Length; i++)
-        {
-            codeTable[words[i]] = codes[i];
-        }
-
-        return codeTable;
-    }
-
-    private Dictionary<string, string> GenerateRussianCodeTable()
-    {
-        string[] words = { "я", "это", "что", "ты", "был", "и", "себя", "мама", "в", "иметь" };
-        string[] codes = { "@", "#", "$", "%", "&", "*", "(", ")", "!", "?" };
-
-        Dictionary<string, string> codeTable = new Dictionary<string, string>();
-        for (int i = 0; i < words.Length; i++)
-        {
-            codeTable[words[i]] = codes[i];
-        }
-
-        return codeTable;
-    }
    
+
     protected override string ParseText(string text)
     {
-        Dictionary<string, string> codeTable = new Dictionary<string, string>();
-        if (CheckTextOnLanguage() == false)
-        {
-            codeTable = GenerateEnglishCodeTable();
-        }
-        else 
-        {
-            codeTable=GenerateRussianCodeTable();
-        }
-
         string[] wordsInText = text.Split(' ');
-        for (int i = 0; i < wordsInText.Length; i++)
+        DictSymbolsWsords[] codeTable=DictSymbolsWsords.CreateSymToWords();
+        if (CheckTextOnLanguage())
         {
-            if (codeTable.ContainsKey(wordsInText[i]))
+            for (int i = 0; i < wordsInText.Length; i++)
             {
-                wordsInText[i] = codeTable[wordsInText[i]];
+                for (int j = 0; j < codeTable.Length; j++)
+                {
+                    if (wordsInText[i] == codeTable[j].rusWord)
+                    {
+                        wordsInText[i] = codeTable[j].Symbol;
+                    }
+                }
             }
-        }
+            string decodedText = string.Join(" ", wordsInText);
+            Console.WriteLine(decodedText);
+            Console.WriteLine();
+            for (int i = 0; i < codeTable.Length; i++)
+            {
+                decodedText = decodedText.Replace(codeTable[i].Symbol, codeTable[i].rusWord);
+            }
+            return decodedText;
 
-        string decodedText = string.Join(" ", wordsInText);
-        Console.WriteLine(decodedText); 
-        Console.WriteLine();
-        foreach (var pair in codeTable)
-        {
-            decodedText = decodedText.Replace(" " + pair.Value + " ", " " + pair.Key + " ");
         }
-        return decodedText;
+        else
+        {
+            for (int i = 0; i < wordsInText.Length; i++)
+            {
+                for (int j = 0; j < codeTable.Length; j++)
+                {
+                    if (wordsInText[i] == codeTable[j].engWord)
+                    {
+                        wordsInText[i] = codeTable[j].Symbol;
+                    }
+                }
+            }
+            string decodedText = string.Join(" ", wordsInText);
+            Console.WriteLine(decodedText);
+            Console.WriteLine();
+            for (int i = 0; i < codeTable.Length; i++)
+            {
+                decodedText = decodedText.Replace(codeTable[i].Symbol, codeTable[i].engWord);
+            }
+            return decodedText;
+        }
+        
+
+       
+
+        
+       
     }
 }
-class Task_13 : Task 
+class Task_13 : Task
 {
 
 
     public Task_13(string text) : base(text)
     {
     }
-    protected override Dictionary<string, int> CreateRusLetterDict() 
+    protected override Dictionary<string, int> CreateRusLetterDict()
     {
         Dictionary<string, int> rusLetters = new Dictionary<string, int>();
         for (int j = 1072; j < 1105; j++)
@@ -322,9 +349,9 @@ class Task_13 : Task
         }
         return engLetters;
     }
-    protected override string ParseText (string text)// Считает процент слов с какой то определенной буквы
+    protected override string ParseText(string text)// Считает процент слов с какой то определенной буквы
     {
-        Dictionary<string, int> letters = new Dictionary<string, int>() ;
+        Dictionary<string, int> letters = new Dictionary<string, int>();
         if (CheckTextOnLanguage() == false)
         {
             letters = CreateEngLetterDict();
@@ -346,10 +373,10 @@ class Task_13 : Task
         {
             double percent = (letter.Value * 100) / wordsCount; //Подсчет процента слов которые начинаются с каждой буквы
             letters[letter.Key] = Convert.ToInt32(percent); // Замена значений на проценты
-            
+
 
         }
-        foreach(var letter in letters)
+        foreach (var letter in letters)
         {
             if (letter.Value >= 2)  // Выводит только буквы у которых процент больше 2-ух
             {
@@ -363,34 +390,34 @@ class Task_15 : Task
 {
 
     public Task_15(string text) : base(text) { }
-   
+
     protected override string ParseText(string text) //Считает сумму чисел в строке
     {
         string[] wordsInText = text.Split(" ");
-        
+
         double sum = 0;
         for (int i = 0; i < wordsInText.Length; i++)
         {
-            
+
             if (char.IsDigit(wordsInText[i][0]))
             {
                 if (wordsInText[i].Contains(','))
                 {
                     int index = wordsInText[i].IndexOf(',');
-                    wordsInText[i] = wordsInText[i].Substring(0,index) +'.'+ wordsInText[i].Substring(index+1);
+                    wordsInText[i] = wordsInText[i].Substring(0, index) + '.' + wordsInText[i].Substring(index + 1);
                 }
-                for (int j = wordsInText[i].Length-1; j >= 0; j--)
+                for (int j = wordsInText[i].Length - 1; j >= 0; j--)
                 {
                     if (char.IsDigit(wordsInText[i][j]))
                     {
-                        
-                        sum += Convert.ToDouble(wordsInText[i].Substring(0, j +1));
-                       
+
+                        sum += Convert.ToDouble(wordsInText[i].Substring(0, j + 1));
+
                         break;
                     }
                 }
             }
-           
+
         }
         return sum.ToString();
     }
@@ -404,7 +431,7 @@ class Program
 {
     public static void Main()
     {
-        string text = File.ReadAllText(@"D:\Учеба\мисис лабы\Програмирование\туксты\text5.txt");
+        string text = File.ReadAllText(@"C:\Users\user\Documents\Учеба\Прога\text5.txt");
 
         Task_8 task8 = new Task_8(text);
         Console.WriteLine("\t Задание 8");
@@ -413,7 +440,7 @@ class Program
         Task_9 task9 = new Task_9(text);
         Console.WriteLine(task9);
         Console.WriteLine("\n\t Задание 10");
-        Task_10 task10 = new Task_10(task9.ToString(), task9.GetCodes(),task9.GetKeys());
+        Task_10 task10 = new Task_10(task9.ToString(), task9.GetCodes(), task9.GetKeys());
         Console.WriteLine(task10);
         Console.WriteLine("\n \t Задание 12");
         Task_12 task12 = new Task_12(text);
