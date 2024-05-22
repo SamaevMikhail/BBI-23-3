@@ -1,0 +1,38 @@
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.AssemblyInfo.cs
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.AssemblyInfoInputs.cache
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.AssemblyInfo.cs
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\bin\Debug\net8.0\10 lab.exe
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\bin\Debug\net8.0\10 lab.deps.json
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\bin\Debug\net8.0\10 lab.runtimeconfig.json
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\bin\Debug\net8.0\10 lab.dll
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\bin\Debug\net8.0\10 lab.pdb
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.dll
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\refint\10 lab.dll
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.pdb
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.genruntimeconfig.cache
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\ref\10 lab.dll
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.dll
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\refint\10 lab.dll
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.pdb
+C:\Users\User\Desktop\10 lab\10 lab\bin\Debug\net8.0\10 lab.exe
+C:\Users\User\Desktop\10 lab\10 lab\bin\Debug\net8.0\10 lab.deps.json
+C:\Users\User\Desktop\10 lab\10 lab\bin\Debug\net8.0\10 lab.runtimeconfig.json
+C:\Users\User\Desktop\10 lab\10 lab\bin\Debug\net8.0\10 lab.dll
+C:\Users\User\Desktop\10 lab\10 lab\bin\Debug\net8.0\10 lab.pdb
+C:\Users\User\Desktop\10 lab\10 lab\bin\Debug\net8.0\protobuf-net.dll
+C:\Users\User\Desktop\10 lab\10 lab\bin\Debug\net8.0\protobuf-net.Core.dll
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.csproj.Up2Date
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\10 lab.genruntimeconfig.cache
+C:\Users\User\Desktop\10 lab\10 lab\obj\Debug\net8.0\ref\10 lab.dll
+C:\Users\User\Desktop\10 lab\10 lab\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\bin\Debug\net8.0\protobuf-net.dll
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\bin\Debug\net8.0\protobuf-net.Core.dll
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.csproj.AssemblyReference.cache
+C:\Users\user\Documents\Учеба\Прога\10 lab\10 lab\obj\Debug\net8.0\10 lab.csproj.CopyComplete

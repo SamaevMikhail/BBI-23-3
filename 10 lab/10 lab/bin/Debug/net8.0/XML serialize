@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPublication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Publication xsi:type="CaseStudy">
+    <Title>Case Study 1</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>case</string>
+      <string>study</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ReviewArticle">
+    <Title>Review Article 1</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>review</string>
+      <string>article</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ResearchArticle">
+    <Title>Research Article 1</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>research</string>
+      <string>paper</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="CaseStudy">
+    <Title>Case Study 2</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>case study</string>
+      <string>analysis</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ReviewArticle">
+    <Title>Review Article 2</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>literature review</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ResearchArticle">
+    <Title>Research Article 2</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>scientific research</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="CaseStudy">
+    <Title>Case Study 3</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>real-life example</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ReviewArticle">
+    <Title>Review Article 3</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>critical review</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ResearchArticle">
+    <Title>Research Article 3</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>experimental study</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="CaseStudy">
+    <Title>Case Study 4</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>business case</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ReviewArticle">
+    <Title>Review Article 4</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>peer review</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ResearchArticle">
+    <Title>Research Article 4</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>data analysis</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="CaseStudy">
+    <Title>Case Study 5</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>social impact</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ReviewArticle">
+    <Title>Review Article 5</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>journal critique</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ResearchArticle">
+    <Title>Research Article 5</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>statistical analysis</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="CaseStudy">
+    <Title>Case Study 6</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>case study design</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ReviewArticle">
+    <Title>Review Article 6</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>literary review</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ResearchArticle">
+    <Title>Research Article 6</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>scientific investigation</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="CaseStudy">
+    <Title>Case Study 7</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>case study method</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+  <Publication xsi:type="ReviewArticle">
+    <Title>Review Article 7</Title>
+    <Authors>
+      <Author />
+      <Author />
+    </Authors>
+    <KeyWords>
+      <string>review paper</string>
+    </KeyWords>
+    <publicationDate>0001-01-01T00:00:00</publicationDate>
+    <PublicationDate>0001-01-01T00:00:00</PublicationDate>
+  </Publication>
+</ArrayOfPublication>
